@@ -2,6 +2,7 @@ import {BrowserRouter as Router , Routes, Route} from 'react-router-dom';
 import {lazy, Suspense} from 'react'; // use for not rendering all files in network section in inspecion
 // import {ProtectedRoute} from 'react-protected-route'
 import Loader from './components/loader';
+import Header from './components/header';
 
 
 
@@ -34,6 +35,8 @@ const Cart = lazy(()=>import('./pages/cart'));
 const App = () => {
   return (
     <Router>
+      {/* Header */}
+      <Header/>
        <Suspense fallback={<Loader/>}>
        <Routes>
         <Route path='/' element={<Home/>}/>
