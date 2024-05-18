@@ -34,8 +34,8 @@ $color3: rgb(0, 104, 136);
 }
 
 @import "admin-styles/mixin";
-// @import "home";
-// @import "cart";
+@import "home";
+@import "cart";
 // @import "shipping";
 // @import "login";
 // @import "search";
