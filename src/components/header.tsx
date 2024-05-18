@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {
   FaSearch,
   FaShoppingBag,
@@ -7,26 +6,29 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import { useState } from "react";
-import { User } from "../types/types";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
-import toast from "react-hot-toast";
+// import { User } from "../types/types";
+// import { signOut } from "firebase/auth";
+// import { auth } from "../firebase";
+// import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
-interface PropsType {
-  user: User | null;
-}
+// interface PropsType {
+//   user: User | null;
+// }
 
-const Header = ({ user }: PropsType) => {
+const user ={_id: "shub" , role: "admin"};
+
+const Header = () => {    // { user }: PropsType
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const logoutHandler = async () => {
-    try {
-      await signOut(auth);
-      toast.success("Sign Out Successfully");
-      setIsOpen(false);
-    } catch (error) {
-      toast.error("Sign Out Fail");
-    }
+    // try {
+    //   await signOut(auth);
+    //   toast.success("Sign Out Successfully");
+    //   setIsOpen(false);
+    // } catch (error) {
+    //   toast.error("Sign Out Fail");
+    // }
   };
 
   return (
@@ -49,12 +51,12 @@ const Header = ({ user }: PropsType) => {
           <dialog open={isOpen}>
             <div>
               {user.role === "admin" && (
-                <Link onClick={() => setIsOpen(false)} to="/admin/dashboard">
+                <Link  to="/admin/dashboard">   {/*  onClick={() => setIsOpen(false)} */}
                   Admin
-                </Link>
+               </Link>     
               )}
 
-              <Link onClick={() => setIsOpen(false)} to="/orders">
+              <Link  to="/orders">  {/* onClick={() => setIsOpen(false)} */}
                 Orders
               </Link>
               <button onClick={logoutHandler}>
