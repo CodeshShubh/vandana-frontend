@@ -31,6 +31,14 @@ const TransactionManagement = lazy(
 const Home = lazy(()=>import('./pages/home'));
 const Search = lazy(()=>import('./pages/search'));
 const Cart = lazy(()=>import('./pages/cart'));
+
+// not logged in route
+const Login = lazy(()=>import('./pages/login'));
+
+
+
+
+// user need login to acces this route
 const Shipping = lazy(()=>import('./components/shipping'));
 
 
@@ -44,8 +52,19 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
         <Route path='/search' element={<Search/>}/>
         <Route path='/cart' element={<Cart/>}/>
-        <Route path='/shipping' element={<Shipping/>}/>
 
+
+        {/* not logged in route */}
+        <Route path='/login' element={<Login/>}/>
+
+
+
+
+
+        {/* user need login to acces these route */}
+          <Route>
+          <Route path='/shipping' element={<Shipping/>}/>
+          </Route>
 
 
         {/* Admin Routes */}
