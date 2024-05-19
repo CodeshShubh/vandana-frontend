@@ -48,7 +48,8 @@ const Home = () => {
           ))
         )} */}
 
-        <ProductCard productId="djhskfj" name="Mackbook" price={3454} stock ={7} 
+        <ProductCard productId="djhskfj" name="Mackbook" price={3454} stock ={7}
+         photo="https://m.media-amazon.com/images/I/71-D1xCuVwL._SX679_.jpg"
          handler={addToCartHandler}
         />
       </main>

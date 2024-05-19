@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa";
 
 type ProductsProps = {
   productId: string;
-  //photo: string;
+  photo: string;
   name: string;
   price: number;
   stock: number;
@@ -23,7 +23,7 @@ const ProductCard = ({
 }: ProductsProps) => {
   return (
     <div className="product-card">
-      <img src={`${server}/${photo}`} alt={name} />
+       <img src={photo} alt={name} /> {/*`${server}/${photo}` */}
       <p>{name}</p>
       <span>₹{price}</span>
 

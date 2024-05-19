@@ -32,13 +32,18 @@ $color3: rgb(0, 104, 136);
 .green {
   color: rgb(0, 195, 0);
 }
-
+// mixin css file always on top for access mixin porperties
 @import "admin-styles/mixin";
+
+// main css files for pages
 @import "home";
 @import "cart";
 @import "shipping";
 @import "login";
-// @import "search";
+@import "search";
+
+
+// damin css files
 @import "admin-styles/dashboard";
 @import "admin-styles/products";
 @import "admin-styles/chart";
