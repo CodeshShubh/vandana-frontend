@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 //   user: User | null;
 // }
 
-const user ={_id: "shub" , role: "admin"};
+const user ={_id: "jshfh" , role: ""}; // shub admin
 
 const Header = () => {    // { user }: PropsType
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -51,12 +51,12 @@ const Header = () => {    // { user }: PropsType
           <dialog open={isOpen}>
             <div>
               {user.role === "admin" && (
-                <Link  to="/admin/dashboard">   {/*  onClick={() => setIsOpen(false)} */}
+                <Link  to="/admin/dashboard"   onClick={() => setIsOpen(false)} >   
                   Admin
                </Link>     
               )}
 
-              <Link  to="/orders">  {/* onClick={() => setIsOpen(false)} */}
+              <Link  to="/orders" onClick={() => setIsOpen(false)}>  
                 Orders
               </Link>
               <button onClick={logoutHandler}>

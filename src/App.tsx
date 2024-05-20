@@ -32,7 +32,12 @@ const Home = lazy(()=>import('./pages/home'));
 const Search = lazy(()=>import('./pages/search'));
 const Cart = lazy(()=>import('./pages/cart'));
 
-// not logged in route
+
+
+
+
+
+// not logged in route here user login itself
 const Login = lazy(()=>import('./pages/login'));
 
 
@@ -40,6 +45,9 @@ const Login = lazy(()=>import('./pages/login'));
 
 // user need login to acces this route
 const Shipping = lazy(()=>import('./components/shipping'));
+const Orders = lazy(()=>import('./pages/orders'));
+const OrderDetails = lazy(()=>import( './pages/order-details'));
+
 
 
 const App = () => {
@@ -54,6 +62,8 @@ const App = () => {
         <Route path='/cart' element={<Cart/>}/>
 
 
+
+
         {/* not logged in route */}
         <Route path='/login' element={<Login/>}/>
 
@@ -64,6 +74,8 @@ const App = () => {
         {/* user need login to acces these route */}
           <Route>
           <Route path='/shipping' element={<Shipping/>}/>
+          <Route path='/orders' element={<Orders/>}/>
+        <Route path='/order/:id' element={<OrderDetails/>}/>
           </Route>
 
 
