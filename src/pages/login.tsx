@@ -1,8 +1,8 @@
-// import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-// import { auth } from "../firebase";
+import { auth } from "../firebase";
 // import { getUser, useLoginMutation } from "../redux/api/userAPI";
 // import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 // import { MessageResponse } from "../types/api-types";
@@ -17,19 +17,20 @@ const Login = () => {
   // const [login] = useLoginMutation();
 
   const loginHandler = async () => {
-    // try {
-      // const provider = new GoogleAuthProvider();
-      // const { user } = await signInWithPopup(auth, provider);
+    try {
+      const provider = new GoogleAuthProvider();
+      const { user } = await signInWithPopup(auth, provider);
 
-      // console.log({
-      //   name: user.displayName!,
-      //   email: user.email!,
-      //   photo: user.photoURL!,
-      //   gender,
-      //   role: "user",
-      //   dob: date,
-      //   _id: user.uid,
-      // });
+      console.log({
+        // name: user.displayName!,
+        // email: user.email!,
+        // photo: user.photoURL!,
+        // gender,
+        // role: "user",
+        // dob: date,
+        // _id: user.uid,
+        user
+      });
 
       // const res = await login({
       //   name: user.displayName!,
@@ -51,9 +52,9 @@ const Login = () => {
   //       toast.error(message);
   //       dispatch(userNotExist());
   //     }
-  //   } catch (error) {
-  //     toast.error("Sign In Fail");
-  //   }
+    } catch (error) {
+      toast.error("Sign In Fail");
+    }
   };
 
   return (

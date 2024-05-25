@@ -3,6 +3,7 @@ import {lazy, Suspense} from 'react'; // use for not rendering all files in netw
 // import {ProtectedRoute} from 'react-protected-route'
 import Loader from './components/loader';
 import Header from './components/header';
+import {Toaster} from 'react-hot-toast';
 
 
 
@@ -108,6 +109,7 @@ const App = () => {
             </Route>;
       </Routes>
        </Suspense>
+       <Toaster position="bottom-center"/>
     </Router>
   )
 }

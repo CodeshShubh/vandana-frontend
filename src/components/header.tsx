@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 //   user: User | null;
 // }
 
-const user ={_id: "jshfh" , role: ""}; // shub admin
+const user ={_id: "" , role: ""}; // shub admin
 
 const Header = () => {    // { user }: PropsType
   const [isOpen, setIsOpen] = useState<boolean>(false);
