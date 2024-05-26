@@ -6,19 +6,18 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import { useState } from "react";
-// import { User } from "../types/types";
+import { User } from "../types/types";
 // import { signOut } from "firebase/auth";
 // import { auth } from "../firebase";
 // import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-// interface PropsType {
-//   user: User | null;
-// }
+interface PropsType {
+  user: User | null;
+}
 
-const user ={_id: "" , role: ""}; // shub admin
 
-const Header = () => {    // { user }: PropsType
+const Header = ({ user }: PropsType) => {    
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const logoutHandler = async () => {

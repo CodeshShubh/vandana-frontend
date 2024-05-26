@@ -28,10 +28,11 @@ import {
 //     users: User[];
 //   };
   
-//   export type UserResponse = {
-//     success: boolean;
-//     user: User;
-//   };
+// this user form database
+  export type UserResponse = {
+    success: boolean;
+    user: User;
+  };
   
 //   export type AllProductsResponse = {
 //     success: boolean;

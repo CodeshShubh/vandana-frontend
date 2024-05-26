@@ -1,13 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import axios from "axios";
+import axios from "axios";
 import {
 //   AllUsersResponse,
 //   DeleteUserRequest,
   MessageResponse,
-//   UserResponse,
+  UserResponse,
 } from "../../types/api-types";
 import { User } from "../../types/types";
 
+// this is for storing user in mongodb databse which is taken by firebse
 export const userAPI = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
@@ -39,17 +40,18 @@ export const userAPI = createApi({
   }),
 });
 
-// export const getUser = async (id: string) => {
-//   try {
-//     const { data }: { data: UserResponse } = await axios.get(
-//       `${import.meta.env.VITE_SERVER}/api/v1/user/${id}`
-//     );
+// this user taken by the mongodb databse for api which is make in backend
+export const getUser = async (id: string) => {
+  try {
+    const { data }: { data: UserResponse } = await axios.get(
+      `${import.meta.env.VITE_SERVER}/api/v1/user/${id}`
+    );
 
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const { useLoginMutation,  } = userAPI;   //useAllUsersQuery, useDeleteUserMutation
   

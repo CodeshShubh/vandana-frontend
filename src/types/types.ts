@@ -7,7 +7,7 @@ export type User = {
   dob: string;
   _id: string;
 };
-
+  
 // export type Product = {
 //   name: string;
 //   price: number;
