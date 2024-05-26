@@ -7,8 +7,10 @@ import {Toaster} from 'react-hot-toast';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import { userExist, userNotExist } from './redux/reducer/userReducer';
-import {useDispatch } from 'react-redux'
+import {useDispatch, useSelector } from 'react-redux'
 import { getUser } from './redux/api/userAPI';
+import { UserReducerInitialState } from './types/reducer-types';
+import ProtectedRoute from './components/protected-route';
 
 
 
@@ -58,6 +60,8 @@ const OrderDetails = lazy(()=>import( './pages/order-details'));
 
 const App = () => {
 
+  const {user , loading} = useSelector((state:{userReducer:UserReducerInitialState})=> state.userReducer)
+
    const dispatch = useDispatch();
 
 useEffect(() => {
@@ -73,10 +77,10 @@ useEffect(() => {
 
 
 
-  return (
+  return loading? <Loader/> :(
     <Router>
       {/* Header */}
-      <Header user{null}/>
+      <Header user={user}/>
        <Suspense fallback={<Loader/>}>
        <Routes>
         <Route path='/' element={<Home/>}/>
@@ -87,14 +91,16 @@ useEffect(() => {
 
 
         {/* not logged in route */}
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/login' element={<ProtectedRoute isAuthenticated={user ? false:true}>
+          <Login/>
+        </ProtectedRoute>}/>
 
 
 
 
 
         {/* user need login to acces these route */}
-          <Route>
+          <Route element = {<ProtectedRoute isAuthenticated={user? true:false}/>} >
           <Route path='/shipping' element={<Shipping/>}/>
           <Route path='/orders' element={<Orders/>}/>
         <Route path='/order/:id' element={<OrderDetails/>}/>
@@ -104,9 +110,9 @@ useEffect(() => {
         {/* Admin Routes */}
       
             <Route
-              // element={
-              //   <ProtectedRoute isAuthenticated={true} adminRoute={true} isAdmin={true} />
-              // }
+              element={
+                <ProtectedRoute isAuthenticated={true} adminOnly={true} admin={user?.role==="admin" ? true : false} />
+              }
             >
               <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/product" element={<Products />} />
