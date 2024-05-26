@@ -22,10 +22,10 @@ export const productAPI = createApi({
       query: () => "latest",
       // providesTags: ["product"],
     }),
-    // allProducts: builder.query<AllProductsResponse, string>({
-    //   query: (id) => `admin-products?id=${id}`,
+    allProducts: builder.query<AllProductsResponse, string>({
+      query: (id) => `admin-products?id=${id}`,
     //   providesTags: ["product"],
-    // }),
+    }),
     // categories: builder.query<CategoriesResponse, string>({
     //   query: () => `categories`,
     //   providesTags: ["product"],
@@ -82,7 +82,7 @@ export const productAPI = createApi({
 
 export const {
   useLatestProductsQuery,
-  // useAllProductsQuery,
+  useAllProductsQuery,
   // useCategoriesQuery,
   // useSearchProductsQuery,
   // useNewProductMutation,

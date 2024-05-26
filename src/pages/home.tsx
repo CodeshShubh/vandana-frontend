@@ -6,7 +6,7 @@ import { Skeleton } from "../components/loader";
 import { useLatestProductsQuery } from "../redux/api/productAPI";
 // import { addToCart } from "../redux/reducer/cartReducer";
 // import { CartItem } from "../types/types";
-
+ 
 const Home = () => {
   const { data, isLoading, isError } = useLatestProductsQuery(""); 
 

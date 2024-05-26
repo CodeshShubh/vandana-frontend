@@ -10,6 +10,7 @@ import {
     User,
   } from "./types";
   
+  // Custom Error for products.tsx
   export type CustomError = {
     status: number;
     data: {
