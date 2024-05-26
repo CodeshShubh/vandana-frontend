@@ -47,16 +47,18 @@ import {
     categories: string[];
   };
   
-//   export type SearchProductsResponse = AllProductsResponse & {
-//     totalPage: number;
-//   };
-//   export type SearchProductsRequest = {
-//     price: number;
-//     page: number;
-//     category: string;
-//     search: string;
-//     sort: string;
-//   };
+  // for show productCard and search by quary like max price search by name 
+  export type SearchProductsResponse = AllProductsResponse & {
+    totalPage: number;
+  };
+  export type SearchProductsRequest = {
+    price: number;
+    page: number;
+    category: string;
+    search: string;
+    sort: string;
+  };
+
 //   export type ProductResponse = {
 //     success: boolean;
 //     product: Product;

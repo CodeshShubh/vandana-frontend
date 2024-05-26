@@ -6,8 +6,8 @@ import {
   // MessageResponse,
   // NewProductRequest,
   // ProductResponse,
-  // SearchProductsRequest,
-  // SearchProductsResponse,
+  SearchProductsRequest,
+  SearchProductsResponse,
   // UpdateProductRequest,
 } from "../../types/api-types";
 
@@ -31,21 +31,21 @@ export const productAPI = createApi({
       // providesTags: ["product"],
     }),
 
-    // searchProducts: builder.query<
-    //   SearchProductsResponse,
-    //   SearchProductsRequest
-    // >({
-    //   query: ({ price, search, sort, category, page }) => {
-    //     let base = `all?search=${search}&page=${page}`;
+    // this is product search by price sort and category or for show productCard and search by quary like max price search by name
+    searchProducts: builder.query<
+      SearchProductsResponse,
+      SearchProductsRequest>({
+      query: ({ price, search, sort, category, page }) => {
+        let base = `all?search=${search}&page=${page}`;
 
-    //     if (price) base += `&price=${price}`;
-    //     if (sort) base += `&sort=${sort}`;
-    //     if (category) base += `&category=${category}`;
+        if (price) base += `&price=${price}`;
+        if (sort) base += `&sort=${sort}`;
+        if (category) base += `&category=${category}`;
 
-    //     return base;
-    //   },
-    //   providesTags: ["product"],
-    // }),
+        return base;
+      },
+      // providesTags: ["product"],
+    }),
 
     // productDetails: builder.query<ProductResponse, string>({
     //   query: (id) => id,
@@ -84,7 +84,7 @@ export const {
   useLatestProductsQuery,
   useAllProductsQuery,
   useCategoriesQuery,
-  // useSearchProductsQuery,
+  useSearchProductsQuery,
   // useNewProductMutation,
   // useProductDetailsQuery,
   // useUpdateProductMutation,
