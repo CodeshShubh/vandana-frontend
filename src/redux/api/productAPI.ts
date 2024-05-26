@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   AllProductsResponse,
-  // CategoriesResponse,
+  CategoriesResponse,
   // DeleteProductRequest,
   // MessageResponse,
   // NewProductRequest,
@@ -26,10 +26,10 @@ export const productAPI = createApi({
       query: (id) => `admin-products?id=${id}`,
     //   providesTags: ["product"],
     }),
-    // categories: builder.query<CategoriesResponse, string>({
-    //   query: () => `categories`,
-    //   providesTags: ["product"],
-    // }),
+    categories: builder.query<CategoriesResponse, string>({
+      query: () => `categories`,
+      // providesTags: ["product"],
+    }),
 
     // searchProducts: builder.query<
     //   SearchProductsResponse,
@@ -83,7 +83,7 @@ export const productAPI = createApi({
 export const {
   useLatestProductsQuery,
   useAllProductsQuery,
-  // useCategoriesQuery,
+  useCategoriesQuery,
   // useSearchProductsQuery,
   // useNewProductMutation,
   // useProductDetailsQuery,

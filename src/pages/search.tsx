@@ -1,23 +1,23 @@
 import { useState } from "react";
 import ProductCard from "../components/product-card";
-// import {
-//   useCategoriesQuery,
-//   useSearchProductsQuery,
-// } from "../redux/api/productAPI";
-// import { CustomError } from "../types/api-types";
-// import toast from "react-hot-toast";
+import {
+  useCategoriesQuery,
+  // useSearchProductsQuery,
+} from "../redux/api/productAPI";
+import { CustomError } from "../types/api-types";
+import toast from "react-hot-toast";
 // import { Skeleton } from "../components/loader";
 // import { CartItem } from "../types/types";
 // import { addToCart } from "../redux/reducer/cartReducer";
 // import { useDispatch } from "react-redux";
 
 const Search = () => {
-  // const {
-  //   data: categoriesResponse,
-  //   isLoading: loadingCategories,
-  //   isError,
-  //   error,
-  // } = useCategoriesQuery("");
+  const {
+    data: categoriesResponse,
+    isLoading: loadingCategories,
+    isError,
+    error,
+  } = useCategoriesQuery("");
 
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
@@ -49,10 +49,10 @@ const Search = () => {
   const isPrevPage = page > 1;
   const isNextPage = page < 4;
 
-  // if (isError) {
-  //   const err = error as CustomError;
-  //   toast.error(err.data.message);
-  // }
+  if (isError) {
+    const err = error as CustomError;
+    toast.error(err.data.message);
+  }
   // if (productIsError) {
   //   const err = productError as CustomError;
   //   toast.error(err.data.message);
@@ -88,15 +88,12 @@ const Search = () => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">ALL</option>
-            <option value="">Sample1</option>
-            <option value="">Sample2</option>
-
-            {/* {!loadingCategories &&
+            {!loadingCategories &&
               categoriesResponse?.categories.map((i) => (
                 <option key={i} value={i}>
                   {i.toUpperCase()}
                 </option>
-              ))} */}
+              ))}
           </select>
         </div>
       </aside>

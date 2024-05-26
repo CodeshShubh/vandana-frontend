@@ -35,14 +35,17 @@ import {
     user: User;
   };
   
+  // for product in admin dashboard
   export type AllProductsResponse = {
     success: boolean;
     products: Product[];
   };
-//   export type CategoriesResponse = {
-//     success: boolean;
-//     categories: string[];
-//   };
+
+// this is for Categories for search bar page
+  export type CategoriesResponse = {
+    success: boolean;
+    categories: string[];
+  };
   
 //   export type SearchProductsResponse = AllProductsResponse & {
 //     totalPage: number;
