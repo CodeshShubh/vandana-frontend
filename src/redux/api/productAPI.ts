@@ -3,8 +3,8 @@ import {
   AllProductsResponse,
   CategoriesResponse,
   // DeleteProductRequest,
-  // MessageResponse,
-  // NewProductRequest,
+  MessageResponse,
+  NewProductRequest,
   // ProductResponse,
   SearchProductsRequest,
   SearchProductsResponse,
@@ -16,19 +16,19 @@ export const productAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_SERVER}/api/v1/product/`,
   }),
-  // tagTypes: ["product"],
+  tagTypes: ["product"],
   endpoints: (builder) => ({
     latestProducts: builder.query<AllProductsResponse, string>({
       query: () => "latest",
-      // providesTags: ["product"],
+      providesTags: ["product"],
     }),
     allProducts: builder.query<AllProductsResponse, string>({
       query: (id) => `admin-products?id=${id}`,
-    //   providesTags: ["product"],
+      providesTags: ["product"],
     }),
     categories: builder.query<CategoriesResponse, string>({
       query: () => `categories`,
-      // providesTags: ["product"],
+      providesTags: ["product"],
     }),
 
     // this is product search by price sort and category or for show productCard and search by quary like max price search by name
@@ -44,7 +44,7 @@ export const productAPI = createApi({
 
         return base;
       },
-      // providesTags: ["product"],
+      providesTags: ["product"],
     }),
 
     // productDetails: builder.query<ProductResponse, string>({
@@ -52,14 +52,15 @@ export const productAPI = createApi({
     //   providesTags: ["product"],
     // }),
 
-    // newProduct: builder.mutation<MessageResponse, NewProductRequest>({
-    //   query: ({ formData, id }) => ({
-    //     url: `new?id=${id}`,
-    //     method: "POST",
-    //     body: formData,
-    //   }),
-    //   invalidatesTags: ["product"],
-    // }),
+    // mutation new product create(here we sending form data)
+    newProduct: builder.mutation<MessageResponse, NewProductRequest>({
+      query: ({ formData, id }) => ({
+        url: `new?id=${id}`,
+        method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: ["product"],
+    }),
 
     // updateProduct: builder.mutation<MessageResponse, UpdateProductRequest>({
     //   query: ({ formData, userId, productId }) => ({
@@ -85,7 +86,7 @@ export const {
   useAllProductsQuery,
   useCategoriesQuery,
   useSearchProductsQuery,
-  // useNewProductMutation,
+  useNewProductMutation,
   // useProductDetailsQuery,
   // useUpdateProductMutation,
   // useDeleteProductMutation,

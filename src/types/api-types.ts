@@ -93,10 +93,12 @@ import {
 //     charts: Line;
 //   };
   
-//   export type NewProductRequest = {
-//     id: string;
-//     formData: FormData;
-//   };
+
+// create newProduct request
+  export type NewProductRequest = {
+    id: string;
+    formData: FormData;
+  };
 //   export type UpdateProductRequest = {
 //     userId: string;
 //     productId: string;
