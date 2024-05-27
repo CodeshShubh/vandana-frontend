@@ -2,13 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   AllProductsResponse,
   CategoriesResponse,
-  // DeleteProductRequest,
+  DeleteProductRequest,
   MessageResponse,
   NewProductRequest,
-  // ProductResponse,
+  ProductResponse,
   SearchProductsRequest,
   SearchProductsResponse,
-  // UpdateProductRequest,
+  UpdateProductRequest,
 } from "../../types/api-types";
 
 export const productAPI = createApi({
@@ -46,13 +46,13 @@ export const productAPI = createApi({
       },
       providesTags: ["product"],
     }),
+     // for single product api
+    productDetails: builder.query<ProductResponse, string>({
+      query: (id) => id,
+      providesTags: ["product"],
+    }),
 
-    // productDetails: builder.query<ProductResponse, string>({
-    //   query: (id) => id,
-    //   providesTags: ["product"],
-    // }),
-
-    // mutation new product create(here we sending form data)
+    // mutation new product create(here we sending form data) for(produtctmanagement.tsx) (update product, delete product also)
     newProduct: builder.mutation<MessageResponse, NewProductRequest>({
       query: ({ formData, id }) => ({
         url: `new?id=${id}`,
@@ -62,22 +62,23 @@ export const productAPI = createApi({
       invalidatesTags: ["product"],
     }),
 
-    // updateProduct: builder.mutation<MessageResponse, UpdateProductRequest>({
-    //   query: ({ formData, userId, productId }) => ({
-    //     url: `${productId}?id=${userId}`,
-    //     method: "PUT",
-    //     body: formData,
-    //   }),
-    //   invalidatesTags: ["product"],
-    // }),
-
-    // deleteProduct: builder.mutation<MessageResponse, DeleteProductRequest>({
-    //   query: ({ userId, productId }) => ({
-    //     url: `${productId}?id=${userId}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["product"],
-    // }),
+    //updateproduct(produtctmanagement.tsx)
+    updateProduct: builder.mutation<MessageResponse, UpdateProductRequest>({
+      query: ({ formData, userId, productId }) => ({
+        url: `${productId}?id=${userId}`,
+        method: "PUT",
+        body: formData,
+      }),
+      invalidatesTags: ["product"],
+    }),
+   // deleteProduct(produtctmanagement.tsx)
+    deleteProduct: builder.mutation<MessageResponse, DeleteProductRequest>({
+      query: ({ userId, productId }) => ({
+        url: `${productId}?id=${userId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["product"],
+    }),
   }),
 });
 
@@ -87,7 +88,7 @@ export const {
   useCategoriesQuery,
   useSearchProductsQuery,
   useNewProductMutation,
-  // useProductDetailsQuery,
-  // useUpdateProductMutation,
-  // useDeleteProductMutation,
+  useProductDetailsQuery,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } = productAPI;

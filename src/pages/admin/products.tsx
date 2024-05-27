@@ -67,6 +67,8 @@ const Products = () => {
       );
   }, [data]);
 
+  
+
   const Table = TableHOC<DataType>(
     columns,
     rows,
