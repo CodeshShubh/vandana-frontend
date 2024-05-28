@@ -1,56 +1,50 @@
 // import axios from "axios";
 import {useEffect,  useState } from "react"; 
 import { VscError } from "react-icons/vsc";
-// import { useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";  
 import { Link } from "react-router-dom";
 import CartItemCard from "../components/cart-item";
-// import {
-//   addToCart,
-//   calculatePrice,
-//   discountApplied,
-//   removeCartItem,
-// } from "../redux/reducer/cartReducer";
+import { CartReducerInitialState } from "../types/reducer-types";
+import { CartItem } from "../types/types";
+import { addToCart } from "../redux/reducer/cartReducer";
+import {
+  // addToCart,
+  // calculatePrice,
+  // discountApplied,
+  removeCartItem,
+} from "../redux/reducer/cartReducer";
 // import { RootState, server } from "../redux/store";
-// import { CartItem } from "../types/types";
-  const cartItems =[
-  
-    {
-      productId: 'ksjdhflsdfh',
-      photo: "https://m.media-amazon.com/images/I/514j-RPeWyL._SX679_.jpg",
-      name: "ac",
-      price:3000,
-      quantity:40,
-      stock:20
-    }
-
-  ];
-  const subtotal= 4000;
-  const tax = Math.round(subtotal*0.18);
-  const shippingCharges = 200;
-  const discount = 400;
-  const total = subtotal+tax;
+ 
+ 
   
 const Cart = () => {
   // const { cartItems, subtotal, tax, total, shippingCharges, discount } =
   //   useSelector((state: RootState) => state.cartReducer);
   // const dispatch = useDispatch();
+ const {cartItems,subtotal,tax,total,shippingCharges,discount} = useSelector((state:{cartReducer:CartReducerInitialState})=>state.cartReducer)
+
+ const dispatch = useDispatch();
+
 
  const [couponCode, setCouponCode] = useState<string>("");
   const [isValidCouponCode, setIsValidCouponCode] = useState<boolean>(false);
 
-  // const incrementHandler = (cartItem: CartItem) => {
-  //   // if (cartItem.quantity >= cartItem.stock) return;
+ 
 
-  //   // dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity + 1 }));
-  // };
-  // const decrementHandler = (cartItem: CartItem) => {
-  //   if (cartItem.quantity <= 1) return;
+  const incrementHandler = (cartItem: CartItem) => {
+    if (cartItem.quantity >= cartItem.stock) return;  // this is for increment not greater than stock
 
-  //   // dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity - 1 }));
-  // };
-  // const removeHandler = (productId: string) => {
-  //   // dispatch(removeCartItem(productId));
-  // };
+    dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity + 1 }));
+  };
+
+  const decrementHandler = (cartItem: CartItem) => {
+    if (cartItem.quantity <= 1) return;  // this is for decrement not less then 1
+
+    dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity - 1 }));
+  };
+  const removeHandler = (productId: string) => {
+    dispatch(removeCartItem(productId));
+  };
    useEffect(() => {
   //   const { token: cancelToken, cancel } = axios.CancelToken.source();
 
@@ -91,9 +85,9 @@ const Cart = () => {
         {cartItems.length > 0 ? (
           cartItems.map((i, idx) => (
             <CartItemCard
-              // incrementHandler={incrementHandler}
-              // decrementHandler={decrementHandler}
-              // removeHandler={removeHandler}
+              incrementHandler={incrementHandler}
+              decrementHandler={decrementHandler}
+              removeHandler={removeHandler}
               key={idx}
               cartItem={i}
             />

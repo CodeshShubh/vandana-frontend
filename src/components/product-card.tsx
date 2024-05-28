@@ -1,6 +1,6 @@
 import { FaPlus } from "react-icons/fa";
 import { server } from "../redux/store";
-// import { CartItem } from "../types/types";
+import { CartItem } from "../types/types";
 
 type ProductsProps = {
   productId: string;
@@ -8,7 +8,7 @@ type ProductsProps = {
   name: string;
   price: number;
   stock: number;
-  handler: ()=>void;   // (cartItem: CartItem) => string | undefined;
+  handler: (cartItem: CartItem) => string | undefined;
 };
 
 
@@ -22,14 +22,14 @@ const ProductCard = ({
 }: ProductsProps) => {
   return (
     <div className="product-card">
-       <img src={`${server}/${photo}` } alt={"img"}/> 
+      <img src={`${server}/${photo}`} alt={name} /> 
       <p>{name}</p>
       <span>₹{price}</span>
 
       <div>
         <button
           onClick={() =>
-            handler()   // { productId, price, name, photo, stock, quantity: 1 } this is button basically use for overly
+            handler({ productId, price, name, photo, stock, quantity: 1 })   //  this is button basically use for overly
           }
         >
           <FaPlus />
