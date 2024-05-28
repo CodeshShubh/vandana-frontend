@@ -9,7 +9,7 @@ import { CartItem } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
 import {
   // addToCart,
-  // calculatePrice,
+  calculatePrice,
   // discountApplied,
   removeCartItem,
 } from "../redux/reducer/cartReducer";
@@ -75,9 +75,9 @@ const Cart = () => {
     };
   }, [couponCode]);
 
-  // useEffect(() => {
-  //   dispatch(calculatePrice());
-  // }, [cartItems]);
+  useEffect(() => {
+    dispatch(calculatePrice());
+  }, [cartItems]);
 
   return (
     <div className="cart">
