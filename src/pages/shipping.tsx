@@ -1,19 +1,19 @@
 // import axios from "axios";
-import {  ChangeEvent, useState } from "react"; // ChangeEvent, FormEvent, useEffect,
+import {  ChangeEvent, useEffect, useState } from "react"; // ChangeEvent, FormEvent, useEffect,
 // import toast from "react-hot-toast";
 import { BiArrowBack } from "react-icons/bi";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import { saveShippingInfo } from "../redux/reducer/cartReducer";
 // import { RootState, server } from "../redux/store";
-
+ import { CartReducerInitialState } from "../types/reducer-types"; "../types/reducer-types";
 const Shipping = () => {
-  // const { cartItems, total } = useSelector(
-  //   (state: RootState) => state.cartReducer
-  // );
+  const { cartItems, } = useSelector(   // total
+    (state: {cartReducer:CartReducerInitialState}) => state.cartReducer
+  );
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [shippingInfo, setShippingInfo] = useState({
     address: "",
@@ -56,9 +56,9 @@ const Shipping = () => {
   //   }
   };
 
-  // useEffect(() => {
-  //   if (cartItems.length <= 0) return navigate("/cart");
-  // }, [cartItems]);
+  useEffect(() => {
+    if (cartItems.length <= 0) return navigate("/cart");
+  }, [cartItems]);   // this useEffect used when user direct type shipping url and there is no cartitem then it navigate to /cart
 
   return (
     <div className="shipping">

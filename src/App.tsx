@@ -52,7 +52,7 @@ const Login = lazy(()=>import('./pages/login'));
 
 
 // user need login to acces this route
-const Shipping = lazy(()=>import('./components/shipping'));
+const Shipping = lazy(()=>import('./pages/shipping'));
 const Orders = lazy(()=>import('./pages/orders'));
 const OrderDetails = lazy(()=>import( './pages/order-details'));
 
