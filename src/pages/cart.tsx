@@ -1,4 +1,3 @@
-// import axios from "axios";
 import {useEffect,  useState } from "react"; 
 import { VscError } from "react-icons/vsc";
 import {  useDispatch, useSelector } from "react-redux";  
@@ -10,17 +9,16 @@ import { addToCart } from "../redux/reducer/cartReducer";
 import {
   // addToCart,
   calculatePrice,
-  // discountApplied,
+  discountApplied,
   removeCartItem,
 } from "../redux/reducer/cartReducer";
-// import { RootState, server } from "../redux/store";
+import {  server } from "../redux/store";  //RootState,
+import axios from "axios";
  
  
   
 const Cart = () => {
-  // const { cartItems, subtotal, tax, total, shippingCharges, discount } =
-  //   useSelector((state: RootState) => state.cartReducer);
-  // const dispatch = useDispatch();
+  
  const {cartItems,subtotal,tax,total,shippingCharges,discount} = useSelector((state:{cartReducer:CartReducerInitialState})=>state.cartReducer)
 
  const dispatch = useDispatch();
@@ -46,23 +44,23 @@ const Cart = () => {
     dispatch(removeCartItem(productId));
   };
    useEffect(() => {
-  //   const { token: cancelToken, cancel } = axios.CancelToken.source();
+    const { token: cancelToken, cancel } = axios.CancelToken.source();   // this is cancle token
 
     const timeOutID = setTimeout(() => {
-    //   axios
-    //     .get(`${server}/api/v1/payment/discount?coupon=${couponCode}`, {
-    //       cancelToken,
-    //     })
-    //     .then((res) => {
-    //       dispatch(discountApplied(res.data.discount));
-    //       setIsValidCouponCode(true);
-    //       dispatch(calculatePrice());
-    //     })
-    //     .catch(() => {
-    //       dispatch(discountApplied(0));
-    //       setIsValidCouponCode(false);
-    //       dispatch(calculatePrice());
-    //     });
+      axios
+        .get(`${server}/api/v1/payment/discount?coupon=${couponCode}`, {
+          cancelToken, // this cancel tokne taken from above axios
+        })
+        .then((res) => {
+          dispatch(discountApplied(res.data.discount));
+          setIsValidCouponCode(true);
+          dispatch(calculatePrice());
+        })
+        .catch(() => {
+          dispatch(discountApplied(0));
+          setIsValidCouponCode(false);
+          dispatch(calculatePrice());
+        });
 
     if (Math.random()>0.5) setIsValidCouponCode(true);
     else setIsValidCouponCode(false);
@@ -70,7 +68,7 @@ const Cart = () => {
 
     return () => {
       clearTimeout(timeOutID);
-      //cancel();
+      cancel();    // this cancel  taken from above axios
       setIsValidCouponCode(false);
     };
   }, [couponCode]);
