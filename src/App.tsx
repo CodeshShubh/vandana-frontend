@@ -26,12 +26,12 @@ const Coupon = lazy(() => import("./pages/admin/apps/coupon"));
 const Stopwatch = lazy(() => import("./pages/admin/apps/stopwatch"));
 const Toss = lazy(() => import("./pages/admin/apps/toss"));
 const NewProduct = lazy(() => import("./pages/admin/management/newproduct"));
-const ProductManagement = lazy(
-  () => import("./pages/admin/management/productmanagement")
-);
-const TransactionManagement = lazy(
-  () => import("./pages/admin/management/transactionmanagement")
-);
+const ProductManagement = lazy(() => import("./pages/admin/management/productmanagement"));
+const TransactionManagement = lazy(() => import("./pages/admin/management/transactionmanagement"));
+// notfund page
+const NotFound = lazy(() => import("./pages/not-found"));
+
+
 
 
 
@@ -134,6 +134,8 @@ useEffect(() => {
 
               <Route path="/admin/transaction/:id" element={<TransactionManagement />} />
             </Route>;
+
+            <Route path='*' element={<NotFound/>}/>
       </Routes>
        </Suspense>
        <Toaster position="bottom-center"/>
