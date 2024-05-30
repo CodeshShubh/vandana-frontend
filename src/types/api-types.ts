@@ -1,12 +1,12 @@
 import {
-  // Bar,
+  Bar,
   CartItem,
-  // Line,
+  Line,
   Order,
-  // Pie,
+  Pie,
   Product,
   ShippingInfo,
-  // Stats,
+  Stats,
   User,
 } from "./types";
   
@@ -75,25 +75,27 @@ import {
     order: Order;
   };
   
-//   export type StatsResponse = {
-//     success: boolean;
-//     stats: Stats;
-//   };
+
+  // for dashboard
+  export type StatsResponse = {
+    success: boolean;
+    stats: Stats;
+  };
   
-//   export type PieResponse = {
-//     success: boolean;
-//     charts: Pie;
-//   };
+  export type PieResponse = {
+    success: boolean;
+    charts: Pie;
+  };
   
-//   export type BarResponse = {
-//     success: boolean;
-//     charts: Bar;
-//   };
+  export type BarResponse = {
+    success: boolean;
+    charts: Bar;
+  };
   
-//   export type LineResponse = {
-//     success: boolean;
-//     charts: Line;
-//   };
+  export type LineResponse = {
+    success: boolean;
+    charts: Line;
+  };
   
 
 // create newProduct request (productmanagement.tsx)
