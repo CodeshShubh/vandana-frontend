@@ -1,14 +1,14 @@
 import {
-    // Bar,
-    CartItem,
-    // Line,
-    Order,
-    // Pie,
-    Product,
-    ShippingInfo,
-    // Stats,
-    User,
-  } from "./types";
+  // Bar,
+  CartItem,
+  // Line,
+  Order,
+  // Pie,
+  Product,
+  ShippingInfo,
+  // Stats,
+  User,
+} from "./types";
   
   // Custom Error for products.tsx
   export type CustomError = {
@@ -24,10 +24,11 @@ import {
     message: string;
   };
   
-//   export type AllUsersResponse = {
-//     success: boolean;
-//     users: User[];
-//   };
+  // for user api for that admin check all users
+  export type AllUsersResponse = {
+    success: boolean;
+    users: User[];
+  };
   
 // this user form database
   export type UserResponse = {
@@ -130,9 +131,10 @@ import {
     orderId: string;
   };
   
-    // deleteOrder in orederAPI.ts
+    // now
   export type DeleteUserRequest = {
     userId: string;
     adminUserId: string;
   };
+  
   

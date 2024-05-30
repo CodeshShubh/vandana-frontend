@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import axios from "axios";
 import {
-//   AllUsersResponse,
-//   DeleteUserRequest,
+  AllUsersResponse,
+  DeleteUserRequest,
   MessageResponse,
   UserResponse,
 } from "../../types/api-types";
@@ -14,7 +14,7 @@ export const userAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_SERVER}/api/v1/user/`,
   }),
-  tagTypes: ["users"],
+  tagTypes: ["users"], // now making tagTypes that after delete user we can revalidate instatly
   endpoints: (builder) => ({
     login: builder.mutation<MessageResponse, User>({
       query: (user) => ({
@@ -25,18 +25,20 @@ export const userAPI = createApi({
       invalidatesTags: ["users"],
     }),
 
-    // deleteUser: builder.mutation<MessageResponse, DeleteUserRequest>({
-    //   query: ({ userId, adminUserId }) => ({
-    //     url: `${userId}?id=${adminUserId}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["users"],
-    // }),
+    // only admin can delete user making this api for admin dashboard customer page
+    deleteUser: builder.mutation<MessageResponse, DeleteUserRequest>({
+      query: ({ userId, adminUserId }) => ({
+        url: `${userId}?id=${adminUserId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["users"],
+    }),
 
-    // allUsers: builder.query<AllUsersResponse, string>({
-    //   query: (id) => `all?id=${id}`,
-    //   providesTags: ["users"],
-    // }),
+      //now for find all users
+    allUsers: builder.query<AllUsersResponse, string>({
+      query: (id) => `all?id=${id}`,
+      providesTags: ["users"],
+    }),
   }),
 });
 
@@ -53,5 +55,5 @@ export const getUser = async (id: string) => {
   }
 };
 
-export const { useLoginMutation,  } = userAPI;   //useAllUsersQuery, useDeleteUserMutation
+export const { useLoginMutation,useAllUsersQuery, useDeleteUserMutation  } = userAPI;   //
   
