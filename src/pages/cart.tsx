@@ -1,25 +1,24 @@
-import {useEffect,  useState } from "react"; 
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
-import {  useDispatch, useSelector } from "react-redux";  
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartItemCard from "../components/cart-item";
-import { CartReducerInitialState } from "../types/reducer-types";
-import { CartItem } from "../types/types";
-import { addToCart } from "../redux/reducer/cartReducer";
 import {
+  addToCart,
   // addToCart,
   calculatePrice,
   discountApplied,
-  removeCartItem,
+  removeCartItem
 } from "../redux/reducer/cartReducer";
-import {  server } from "../redux/store";  //RootState,
-import axios from "axios";
+import { RootState, server } from "../redux/store"; //RootState,
+import { CartItem } from "../types/types";
  
  
   
 const Cart = () => {
   
- const {cartItems,subtotal,tax,total,shippingCharges,discount} = useSelector((state:{cartReducer:CartReducerInitialState})=>state.cartReducer)
+ const {cartItems,subtotal,tax,total,shippingCharges,discount} = useSelector((state:RootState)=>state.cartReducer)
 
  const dispatch = useDispatch();
 

@@ -5,12 +5,9 @@ import { BiArrowBack } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { saveShippingInfo } from "../redux/reducer/cartReducer";
-import { server } from "../redux/store"; //RootState,
-import { CartReducerInitialState } from "../types/reducer-types";
+import { RootState, server } from "../redux/store"; //
 const Shipping = () => {
-  const { cartItems, total } = useSelector(   // 
-    (state: {cartReducer:CartReducerInitialState}) => state.cartReducer
-  );
+  const { cartItems, total } = useSelector( (state:RootState) => state.cartReducer);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
