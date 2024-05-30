@@ -3,17 +3,17 @@ import {
     PaymentElement,
     useElements,
     useStripe,
-  } from "@stripe/react-stripe-js";
-  import { loadStripe } from "@stripe/stripe-js";  //useDispatch,
-  import { FormEvent, useState } from "react";
-  import toast from "react-hot-toast";
-//   import {  useSelector } from "react-redux";
-  import {  useNavigate } from "react-router-dom";  //Navigate, useLocation,
-//   import { useNewOrderMutation } from "../redux/api/orderAPI";
-//   import { resetCart } from "../redux/reducer/cartReducer";
-//   import { RootState } from "../redux/store";
-//   import { NewOrderRequest } from "../types/api-types";
-//   import { responseToast } from "../utils/features";
+} from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js"; //
+import { FormEvent, useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useLocation, useNavigate } from "react-router-dom"; // 
+import { useNewOrderMutation } from "../redux/api/orderAPI";
+import { resetCart } from "../redux/reducer/cartReducer";
+import { RootState } from "../redux/store";
+import { NewOrderRequest } from "../types/api-types";
+import { responseToast } from "../utils/features";
   
   const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
   
@@ -21,23 +21,23 @@ import {
     const stripe = useStripe();
     const elements = useElements();
     const navigate = useNavigate();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    
+    const { user } = useSelector((state:RootState) => state.userReducer);
   
-    // const { user } = useSelector((state: RootState) => state.userReducer);
-  
-    // const {
-    //   shippingInfo,
-    //   cartItems,
-    //   subtotal,
-    //   tax,
-    //   discount,
-    //   shippingCharges,
-    //   total,
-    // } = useSelector((state: RootState) => state.cartReducer);
+    const {
+      shippingInfo,
+      cartItems,
+      subtotal,
+      tax,
+      discount,
+      shippingCharges,
+      total,
+    } = useSelector((state:RootState) => state.cartReducer);
   
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
   
-    // const [newOrder] = useNewOrderMutation();
+    const [newOrder] = useNewOrderMutation();
   
     const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -45,18 +45,17 @@ import {
       if (!stripe || !elements) return;
       setIsProcessing(true);
 
-      const order = {};
   
-    //   const orderData: NewOrderRequest = {
-    //     shippingInfo,
-    //     orderItems: cartItems,
-    //     subtotal,
-    //     tax,
-    //     discount,
-    //     shippingCharges,
-    //     total,
-    //     user: user?._id!,
-    //   };
+      const orderData: NewOrderRequest = {
+        shippingInfo,
+        orderItems: cartItems,
+        subtotal,
+        tax,
+        discount,
+        shippingCharges,
+        total,
+        user: user?._id!,
+      };
   
       const { paymentIntent, error } = await stripe.confirmPayment({
         elements,
@@ -70,9 +69,9 @@ import {
       }
   
       if (paymentIntent.status === "succeeded") {
-        // const res = await newOrder(orderData);
-        // dispatch(resetCart());
-        // responseToast(res, navigate, "/orders");
+        const res = await newOrder(orderData);
+        dispatch(resetCart());
+        responseToast(res, navigate, "/orders");
         console.log("placing order")
         navigate("/orders")
       }
@@ -92,16 +91,18 @@ import {
   
   // this is main function of this page
   const Checkout = () => {
-    // const location = useLocation();
+
+    // this is used for taking clientSecret key from shipping.tsx page
+    const location = useLocation();
   
-    // const clientSecret: string | undefined = location.state;
+    const clientSecret: string | undefined = location.state;
   
-    // if (!clientSecret) return <Navigate to={"/shipping"} />;
+    if (!clientSecret) return <Navigate to={"/shipping"} />;
   
     return (
       <Elements
         options={{
-          clientSecret: "pi_3PLwnCHCUB0Pm1la0CdmXv5Y_secret_y0JIhjprd4WCv17MqHBMTxUU3",
+          clientSecret,
         }}
         stripe={stripePromise}
       >

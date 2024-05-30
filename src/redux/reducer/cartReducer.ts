@@ -63,9 +63,12 @@ export const cartReducer = createSlice({
     discountApplied: (state, action: PayloadAction<number>) => {
       state.discount = action.payload;
     },
+
+    // now this is for shippin.tsx to dispatch shipping info to the database
     saveShippingInfo: (state, action: PayloadAction<ShippingInfo>) => {
       state.shippingInfo = action.payload;
     },
+    // now
     resetCart: () => initialState,
   },
 });
@@ -75,6 +78,6 @@ export const {
   removeCartItem,
   calculatePrice,
   discountApplied,
-  saveShippingInfo,
-  resetCart,
+  saveShippingInfo, //now
+  resetCart,  //now
 } = cartReducer.actions;

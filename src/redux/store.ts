@@ -24,4 +24,5 @@ export const store = configureStore({
       orderApi.middleware)
 });
 
+// now used
 export type RootState = ReturnType<typeof store.getState>;
