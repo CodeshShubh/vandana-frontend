@@ -3,16 +3,15 @@ import { DoughnutChart, PieChart } from "../../../components/admin/Charts";
 import { RootState } from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { usePieQuery } from "../../../redux/api/dashboardAPI";
-import { CustomError } from "../../../types/api-types";
-import toast from "react-hot-toast";
 import { Skeleton } from "../../../components/loader";
 import{categories as ctg} from "../../../assets/data.json"
+import { Navigate } from "react-router-dom";
 
 const PieCharts = () => {
 
   const {user} =  useSelector((state:RootState)=>state.userReducer);
 
-const {isLoading, data, error, isError} = usePieQuery(user?._id!)
+const {isLoading, data, isError} = usePieQuery(user?._id!)
 
 const order = data?.charts.orderFullfillment!;
 const categories = data?.charts.productCategories!;
@@ -21,10 +20,7 @@ const revenue = data?.charts.revenueDistribution!;
 const ageGroup = data?.charts.usersAgeGroup!;
 const adminCustomer = data?.charts.adminCustomer!;
 
-if (isError) {
-  const err = error as CustomError;
-  toast.error(err.data.message);
-}
+if (isError) return <Navigate to={"/admin/dashboard"}/>
 
 
 
